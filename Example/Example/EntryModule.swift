@@ -9,18 +9,9 @@ class EntryModule: NSObject, ServiceModule {
         self.context = context
         super.init()
         context.store.dispatch(.set(key: "isLogin", value: true))
-        context.store.dispatch(.set(key: "mainScene", value: WindowGroup {
-            AnyView(
-                Text("entry demo")
-                    .padding()
-                    .onAppear(perform: {
-                        context.store.dispatch(.set(key: "mainScene", value: WindowGroup(content: {
-                            AnyView(Text("sdllsd").padding())
-                        })))
-                    })
-            )
-                    
-            }))
+        context.store.dispatch(.setMainView(builder: {
+            ContentView()
+        }))
     }
     
     
