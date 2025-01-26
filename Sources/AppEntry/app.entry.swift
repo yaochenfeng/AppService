@@ -6,14 +6,16 @@ import AppService
 struct EntryApp: App {
     static let context = ApplicationContext()
     
-    @StateObject var context = Self.context
+    var context = Self.context
+    
     var body: some Scene {
-        WindowGroup {
-            Text("entry")
-                .padding()
-                .onAppear{
-                    print("onAppear")
-                }
+        MainScene(store: context.store)
+    }
+    
+    init() {
+        if let mainMudle = Bundle.main.infoDictionary?["CFBundleName"] as? String,
+           let cls = NSClassFromString("\(mainMudle).EntryModule") as? ServiceModule.Type {
+            Self.context.add(cls.init(context))
         }
     }
 }

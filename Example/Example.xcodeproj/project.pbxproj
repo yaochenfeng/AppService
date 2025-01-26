@@ -12,6 +12,7 @@
 		8FE559E52D45BD6E00C5E3E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FE559E42D45BD6E00C5E3E6 /* Preview Assets.xcassets */; };
 		8FE559EF2D45BD9D00C5E3E6 /* AppEntry in Frameworks */ = {isa = PBXBuildFile; productRef = 8FE559EE2D45BD9D00C5E3E6 /* AppEntry */; };
 		8FE559F02D45BD9D00C5E3E6 /* AppEntry in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8FE559EE2D45BD9D00C5E3E6 /* AppEntry */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8FE559F32D46A09300C5E3E6 /* EntryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE559F22D46A09300C5E3E6 /* EntryModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		8FE559E22D45BD6E00C5E3E6 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		8FE559E42D45BD6E00C5E3E6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8FE559EC2D45BD7D00C5E3E6 /* AppService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppService; path = ..; sourceTree = "<group>"; };
+		8FE559F22D46A09300C5E3E6 /* EntryModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		8FE559DB2D45BD6C00C5E3E6 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				8FE559F22D46A09300C5E3E6 /* EntryModule.swift */,
 				8FE559DE2D45BD6C00C5E3E6 /* ContentView.swift */,
 				8FE559E02D45BD6E00C5E3E6 /* Assets.xcassets */,
 				8FE559E22D45BD6E00C5E3E6 /* Example.entitlements */,
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FE559F32D46A09300C5E3E6 /* EntryModule.swift in Sources */,
 				8FE559DF2D45BD6C00C5E3E6 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +243,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 14.0;
 			};
 			name = Debug;
 		};
@@ -292,6 +297,7 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TVOS_DEPLOYMENT_TARGET = 14.0;
 			};
 			name = Release;
 		};
@@ -324,10 +330,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.yaochenfeng.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Debug;
 		};
@@ -360,10 +368,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.yaochenfeng.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Release;
 		};
