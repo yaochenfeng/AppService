@@ -1,5 +1,11 @@
 import Foundation
 
-public protocol ServiceMudole {
+public protocol ServiceModule {
     
+}
+
+public extension ApplicationContext {
+    func add(_ module: ServiceModule) {
+        self.modules.append(module)
+    }
 }
