@@ -14,5 +14,8 @@ class EntryModule: NSObject, ServiceModule, ServiceDecode {
         }))
     }
     
+    func bootstrap(_ context: ApplicationContext) {
+        
+    }
     
 }

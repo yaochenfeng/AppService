@@ -20,6 +20,8 @@ public class ApplicationContext {
     }
     public var modules: [ServiceModule] = []
     
+    var serviceModules: [AnyServiceModule] = []
+    
     public var store: ServiceStore<State>
 }
 #if canImport(Combine)
@@ -55,5 +57,14 @@ public extension ApplicationContext {
         public func getValue<T>(_ key: String) -> T? {
             return storage[key] as? T
         }
+    }
+    
+    @MainActor
+    func dispatch(_ action: State.Action, forceUpdate: Bool = false) {
+        store.dispatch(action, forceUpdate: forceUpdate)
+    }
+    
+    var state: State {
+        store.state
     }
 }
