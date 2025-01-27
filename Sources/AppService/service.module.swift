@@ -17,13 +17,13 @@ public enum ServiceModuleStage: CaseIterable, Comparable {
 }
 
 public protocol ServiceModule {
-    static var name: String { get }
+    var name: String { get }
     var stage: ServiceModuleStage { get }
     func bootstrap(_ context: ApplicationContext) async
 }
 
 public extension ServiceModule {
-    static var name: String {
+    var name: String {
         return String(describing: Self.self)
     }
     var stage: ServiceModuleStage { .window }
@@ -53,7 +53,11 @@ public extension ApplicationContext {
                 return lhs.stage < rhs.stage
             }
         
-        guard !modules.isEmpty, !isTasking else { return }
+        guard !isTasking else { return }
+        guard !modules.isEmpty else {
+            LogService.app.debug("finish all \(targetStage)")
+            return
+        }
         isTasking = true
         let groupTasks = Dictionary(grouping: modules, by: {$0.stage})
         
@@ -94,7 +98,7 @@ class AnyServiceModule {
     let stage: ServiceModuleStage
     init<T: ServiceModule>(value: T) {
         self.value = value
-        self.name = T.name
+        self.name = value.name
         self.stage = value.stage
     }
 }

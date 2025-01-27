@@ -48,7 +48,6 @@ public extension Service where Base == LogService {
             function: String = #function,
             line: UInt = #line
         ) {
-            _ = try? Base.logger.app.getContext(api: Base.name, args: message)
-            debugPrint(level, message,file,function,line)
+            debugPrint(level, message,function,line)
         }
 }
