@@ -52,21 +52,34 @@ public extension ApplicationContext {
             .filter { !$0.isBooted && $0.stage <= targetStage}
             .sorted { lhs, rhs in
                 return lhs.stage < rhs.stage
-        }
-
-        // 创建一个任务组
-        Task {
-            for module in modules where !module.isBooted {
-                module.isBooted = true
-                // 在任务组中添加任务
-                await withTaskGroup(of: Void.self) { group in
-                    group.addTask {
-                        await module.value.bootstrap(self)
+            }
+        
+        guard !modules.isEmpty, !isTasking else { return }
+        isTasking = true
+        let groupTasks = Dictionary(grouping: modules, by: {$0.stage})
+        
+        for(stage, tasks) in groupTasks {
+            print("start \(stage) with \(tasks)")
+            Task {
+                await withTaskGroup(of: Void.self, body: { group in
+                    for task in tasks {
+                        group.addTask {
+                            
+                            print("start task \(task.name)")
+                            await task.value.bootstrap(self)
+                            task.isBooted = true
+                            print("finish task \(task.name)")
+                        }
                     }
-                    // 等待任务组中的所有任务完成
-                    await group.waitForAll()
+                })
+                
+                print("finish \(stage) with \(tasks)")
+                isTasking = false
+                if stage <= targetStage {
+                    bootstrap(targetStage)
                 }
             }
+            break
         }
     }
 

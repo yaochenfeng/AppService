@@ -22,6 +22,7 @@ public class ApplicationContext {
     
     var serviceModules: [AnyServiceModule] = []
     var targetStage: ServiceModuleStage = .application
+    var isTasking = false
     
     public var store: ServiceStore<State>
 }
