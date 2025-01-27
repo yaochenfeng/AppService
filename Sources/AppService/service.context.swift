@@ -21,6 +21,7 @@ public class ApplicationContext {
     public var modules: [ServiceModule] = []
     
     var serviceModules: [AnyServiceModule] = []
+    var targetStage: ServiceModuleStage = .application
     
     public var store: ServiceStore<State>
 }

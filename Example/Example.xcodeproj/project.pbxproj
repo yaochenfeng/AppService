@@ -14,6 +14,8 @@
 		8FE559F02D45BD9D00C5E3E6 /* AppEntry in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8FE559EE2D45BD9D00C5E3E6 /* AppEntry */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8FE559F32D46A09300C5E3E6 /* EntryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE559F22D46A09300C5E3E6 /* EntryModule.swift */; };
 		8FE559F82D46D2AE00C5E3E6 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FE559F72D46D2AE00C5E3E6 /* Launch.storyboard */; platformFilter = ios; };
+		8FE559FD2D473E6800C5E3E6 /* PrivacyModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE559FC2D473E6800C5E3E6 /* PrivacyModule.swift */; };
+		8FE559FF2D4749C000C5E3E6 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE559FE2D4749C000C5E3E6 /* PrivacyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +41,8 @@
 		8FE559EC2D45BD7D00C5E3E6 /* AppService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppService; path = ..; sourceTree = "<group>"; };
 		8FE559F22D46A09300C5E3E6 /* EntryModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryModule.swift; sourceTree = "<group>"; };
 		8FE559F72D46D2AE00C5E3E6 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		8FE559FC2D473E6800C5E3E6 /* PrivacyModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyModule.swift; sourceTree = "<group>"; };
+		8FE559FE2D4749C000C5E3E6 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				8FE559F22D46A09300C5E3E6 /* EntryModule.swift */,
+				8FE559FC2D473E6800C5E3E6 /* PrivacyModule.swift */,
 				8FE559FB2D4738C200C5E3E6 /* Views */,
 				8FE559F42D46D21400C5E3E6 /* Resources */,
 				8FE559E32D45BD6E00C5E3E6 /* Preview Content */,
@@ -119,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				8FE559DE2D45BD6C00C5E3E6 /* ContentView.swift */,
+				8FE559FE2D4749C000C5E3E6 /* PrivacyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +205,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FE559F32D46A09300C5E3E6 /* EntryModule.swift in Sources */,
+				8FE559FF2D4749C000C5E3E6 /* PrivacyView.swift in Sources */,
+				8FE559FD2D473E6800C5E3E6 /* PrivacyModule.swift in Sources */,
 				8FE559DF2D45BD6C00C5E3E6 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

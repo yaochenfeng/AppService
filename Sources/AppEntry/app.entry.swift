@@ -17,7 +17,7 @@ struct Entry {
 
 @available(iOS 13.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct EntryApp: App {
-    static let context = ApplicationContext()
+    static let context = ApplicationContext.shared
     
     var context = Self.context
     
@@ -29,6 +29,8 @@ struct EntryApp: App {
             let obj = cls.init(context) as? ServiceModule {
             Self.context.add(obj)
         }
+        
+        context.bootstrap(.application)
     }
     
 }

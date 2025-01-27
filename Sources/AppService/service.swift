@@ -7,7 +7,6 @@ public protocol ServiceState: Equatable {
 }
 
 public protocol ServiceDecode {
-    @MainActor
     init(_ context: ApplicationContext)
 }
 

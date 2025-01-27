@@ -11,6 +11,10 @@ struct MainScene: Scene {
             store.state.mainView
         }
     }
+    init(store: ServiceStore<ApplicationContext.State>) {
+        self.store = store
+        EntryApp.context.bootstrap(.window)
+    }
 }
 
 
@@ -24,7 +28,7 @@ public extension ApplicationContext.State {
     }
     
     var mainView: AnyView {
-        return self.getValue("mainView") ?? AnyView(Text("replace dispatch setMainView"))
+        return self.getValue("mainView") ?? AnyView(Text("import AppEntry dispatch setMainView"))
     }
 }
 
