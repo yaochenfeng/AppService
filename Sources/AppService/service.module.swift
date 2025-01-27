@@ -17,13 +17,13 @@ public enum ServiceModuleStage: CaseIterable, Comparable {
 }
 
 public protocol ServiceModule {
-    var id: String { get }
+    static var name: String { get }
     var stage: ServiceModuleStage { get }
     func bootstrap(_ context: ApplicationContext) async
 }
 
 public extension ServiceModule {
-    var id: String {
+    static var name: String {
         return String(describing: Self.self)
     }
     var stage: ServiceModuleStage { .window }
@@ -32,7 +32,6 @@ public extension ServiceModule {
 public extension ApplicationContext {
     @MainActor
     func add(_ module: ServiceModule) {
-        self.modules.append(module)
         self.serviceModules.append(AnyServiceModule(value: module))
     }
     @MainActor
@@ -40,7 +39,7 @@ public extension ApplicationContext {
         let obj = T.init(self)
         self.add(obj)
     }
-
+    
     @MainActor
     func bootstrap(_ stage: ServiceModuleStage) {
         if self.targetStage < stage {
@@ -93,9 +92,9 @@ class AnyServiceModule {
     let name: String
     var isBooted = false
     let stage: ServiceModuleStage
-    init(value: ServiceModule) {
+    init<T: ServiceModule>(value: T) {
         self.value = value
-        self.name = value.id
+        self.name = T.name
         self.stage = value.stage
     }
 }

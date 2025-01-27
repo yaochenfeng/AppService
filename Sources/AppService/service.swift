@@ -2,11 +2,15 @@ import Foundation
 
 public struct Service<Base> {
     public let base: Base
-    private let context: ApplicationContext
+    private let context: ApplicationContext?
     
-    public init(_ base: Base, context: ApplicationContext = .shared) {
+    public init(_ base: Base, context: ApplicationContext? = nil) {
         self.base = base
         self.context = context
+    }
+    
+    public var getContext: ApplicationContext {
+        return context ?? .shared
     }
 }
 

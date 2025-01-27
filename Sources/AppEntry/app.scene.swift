@@ -28,7 +28,18 @@ public extension ApplicationContext.State {
     }
     
     var mainView: AnyView {
-        return self.getValue("mainView") ?? AnyView(Text("import AppEntry dispatch setMainView"))
+    
+        
+        return self.getValue("mainView") ?? AnyView(emptyView)
+    }
+    
+    internal var emptyView: some View {
+        #if canImport(UIKit)
+//        SwiftController.app.launch
+        Text("import AppEntry dispatch setMainView")
+        #else
+        Text("import AppEntry dispatch setMainView")
+        #endif
     }
 }
 
