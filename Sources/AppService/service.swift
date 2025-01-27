@@ -1,5 +1,14 @@
 import Foundation
 
+public struct Service<Base> {
+    public let base: Base
+    private let context: ApplicationContext
+    
+    public init(_ base: Base, context: ApplicationContext = .shared) {
+        self.base = base
+        self.context = context
+    }
+}
 
 public protocol ServiceState: Equatable {
     typealias Reducer = (_ state: Self, _ action: Action) -> Self

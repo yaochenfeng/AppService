@@ -59,21 +59,21 @@ public extension ApplicationContext {
         let groupTasks = Dictionary(grouping: modules, by: {$0.stage})
         
         for(stage, tasks) in groupTasks {
-            print("start \(stage) with \(tasks)")
+            LogService.app.debug("start \(stage)")
             Task {
                 await withTaskGroup(of: Void.self, body: { group in
                     for task in tasks {
                         group.addTask {
                             
-                            print("start task \(task.name)")
+                            LogService.app.debug("start task \(task.name)")
                             await task.value.bootstrap(self)
                             task.isBooted = true
-                            print("finish task \(task.name)")
+                            LogService.app.debug("finish task \(task.name)")
                         }
                     }
                 })
                 
-                print("finish \(stage) with \(tasks)")
+                LogService.app.debug("finish \(stage)")
                 isTasking = false
                 if stage <= targetStage {
                     bootstrap(targetStage)
