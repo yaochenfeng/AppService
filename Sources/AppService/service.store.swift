@@ -1,10 +1,5 @@
 import Foundation
 
-public protocol ServiceState: Equatable {
-    typealias Reducer = (_ state: Self, _ action: Action) -> Self
-    associatedtype Action
-}
-
 public final class ServiceStore<State: ServiceState>: ObservableObject {
     
     @Published

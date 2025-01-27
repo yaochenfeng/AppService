@@ -3,7 +3,7 @@ import SwiftUI
 import AppService
 import AppEntry
 
-class EntryModule: NSObject, ServiceModule {
+class EntryModule: NSObject, ServiceModule, ServiceDecode {
     let context: ApplicationContext
     required init(_ context: AppService.ApplicationContext) {
         self.context = context

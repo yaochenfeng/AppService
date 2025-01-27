@@ -13,7 +13,7 @@
 		8FE559EF2D45BD9D00C5E3E6 /* AppEntry in Frameworks */ = {isa = PBXBuildFile; productRef = 8FE559EE2D45BD9D00C5E3E6 /* AppEntry */; };
 		8FE559F02D45BD9D00C5E3E6 /* AppEntry in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8FE559EE2D45BD9D00C5E3E6 /* AppEntry */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8FE559F32D46A09300C5E3E6 /* EntryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE559F22D46A09300C5E3E6 /* EntryModule.swift */; };
-		8FE559F82D46D2AE00C5E3E6 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FE559F72D46D2AE00C5E3E6 /* Launch.storyboard */; };
+		8FE559F82D46D2AE00C5E3E6 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FE559F72D46D2AE00C5E3E6 /* Launch.storyboard */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,11 +74,9 @@
 		8FE559DB2D45BD6C00C5E3E6 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				8FE559F42D46D21400C5E3E6 /* Resources */,
 				8FE559F22D46A09300C5E3E6 /* EntryModule.swift */,
-				8FE559DE2D45BD6C00C5E3E6 /* ContentView.swift */,
-				8FE559E02D45BD6E00C5E3E6 /* Assets.xcassets */,
-				8FE559E22D45BD6E00C5E3E6 /* Example.entitlements */,
+				8FE559FB2D4738C200C5E3E6 /* Views */,
+				8FE559F42D46D21400C5E3E6 /* Resources */,
 				8FE559E32D45BD6E00C5E3E6 /* Preview Content */,
 			);
 			path = Example;
@@ -110,9 +108,19 @@
 		8FE559F42D46D21400C5E3E6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8FE559E22D45BD6E00C5E3E6 /* Example.entitlements */,
+				8FE559E02D45BD6E00C5E3E6 /* Assets.xcassets */,
 				8FE559F72D46D2AE00C5E3E6 /* Launch.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8FE559FB2D4738C200C5E3E6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8FE559DE2D45BD6C00C5E3E6 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,7 +326,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Example/Resources/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
@@ -358,7 +366,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Example/Resources/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";

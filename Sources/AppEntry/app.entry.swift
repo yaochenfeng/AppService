@@ -6,9 +6,11 @@ struct Entry {
     static func main() {
         if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
             EntryApp.main()
-        } else if #available(iOS 13.0, *) {
+        } else {
+            #if canImport(UIKit)
             _ = EntryApp()
             UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, NSStringFromClass(AppDelegate.self))
+            #endif
         }
     }
 }
@@ -23,8 +25,9 @@ struct EntryApp: App {
     @MainActor
     init() {
         if let mainMudle = Bundle.main.infoDictionary?["CFBundleName"] as? String,
-           let cls = NSClassFromString("\(mainMudle).EntryModule") as? ServiceModule.Type {
-            Self.context.add(cls.init(context))
+           let cls = NSClassFromString("\(mainMudle).EntryModule") as? ServiceDecode.Type,
+            let obj = cls.init(context) as? ServiceModule {
+            Self.context.add(obj)
         }
     }
     
