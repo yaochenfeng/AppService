@@ -44,4 +44,9 @@ public extension Service where Base: AnyObject {
         try block(base)
         return self
     }
+    @discardableResult
+    func then(_ block: (Base) throws -> Void) rethrows -> Base {
+        try block(self.base)
+        return self.base
+    }
 }

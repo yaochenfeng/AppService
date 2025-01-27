@@ -19,7 +19,7 @@ final class ServiceKeyTests: XCTestCase {
     }
 
     func testExample() throws {
-        print(LogKey.name, LogKey.app)
+        print(LogService.name, LogService.app)
     }
 
     func testPerformanceExample() throws {
