@@ -18,3 +18,12 @@ public extension ServiceKey {
 }
 
 extension NSObject: ServiceKey {}
+
+
+public extension Service where Base: ServiceKey {
+    @discardableResult
+    func callAsFunction(method: String, args: Any...) throws -> Any {
+        let namespace = Base.name
+        return try getContext.callAsFunction(namespace: namespace, method: method, args: args)
+    }
+}

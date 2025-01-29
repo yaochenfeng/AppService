@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8FD7C4072D4AA87100A6470F /* LoggerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD7C4062D4AA87100A6470F /* LoggerModule.swift */; };
 		8FE559DF2D45BD6C00C5E3E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE559DE2D45BD6C00C5E3E6 /* ContentView.swift */; };
 		8FE559E12D45BD6E00C5E3E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FE559E02D45BD6E00C5E3E6 /* Assets.xcassets */; };
 		8FE559E52D45BD6E00C5E3E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FE559E42D45BD6E00C5E3E6 /* Preview Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8FD7C4062D4AA87100A6470F /* LoggerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerModule.swift; sourceTree = "<group>"; };
 		8FE559D92D45BD6C00C5E3E6 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE559DE2D45BD6C00C5E3E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8FE559E02D45BD6E00C5E3E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			children = (
 				8FE559F22D46A09300C5E3E6 /* EntryModule.swift */,
 				8FE559FC2D473E6800C5E3E6 /* PrivacyModule.swift */,
+				8FD7C4062D4AA87100A6470F /* LoggerModule.swift */,
 				8FE559FB2D4738C200C5E3E6 /* Views */,
 				8FE559F42D46D21400C5E3E6 /* Resources */,
 				8FE559E32D45BD6E00C5E3E6 /* Preview Content */,
@@ -208,6 +211,7 @@
 				8FE559FF2D4749C000C5E3E6 /* PrivacyView.swift in Sources */,
 				8FE559FD2D473E6800C5E3E6 /* PrivacyModule.swift in Sources */,
 				8FE559DF2D45BD6C00C5E3E6 /* ContentView.swift in Sources */,
+				8FD7C4072D4AA87100A6470F /* LoggerModule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

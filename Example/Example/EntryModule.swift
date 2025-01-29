@@ -9,7 +9,7 @@ class EntryModule: NSObject, ServiceDecode {
     required init(_ context: AppService.ApplicationContext) {
 //        self.context = context
         super.init()
-        
+        context.add(LoggerModule())
         context.add(PrivacyModule())
         context.store.dispatch(.set(key: "isLogin", value: true))
         context.store.dispatch(.setMainView(builder: {

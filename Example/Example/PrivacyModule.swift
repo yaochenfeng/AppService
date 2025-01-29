@@ -10,6 +10,11 @@ import AppService
 import AppEntry
 
 struct PrivacyModule: ServiceModule {
+    func callAsFunction(method: String, args: Any...) throws -> Any {
+        throw ServiceError.unimplemented()
+    }
+    
+    
     var stage: ServiceModuleStage = .privacy
     @MainActor
     func bootstrap(_ context: AppService.ApplicationContext) {

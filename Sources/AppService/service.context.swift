@@ -70,8 +70,11 @@ public extension ApplicationContext {
     }
     
     @discardableResult
-    func callAsFunction(api: String, args: Any...) throws -> Any {
-        throw ServiceError.unimplemented()
-        /// 解析api, 分割成命名空间 和 方法名
+    func callAsFunction(namespace: String, method: String, args: Any...) throws -> Any {
+        
+        guard let module = serviceModules.first(where: { $0.name == namespace }) else {
+            throw ServiceError.notFound(namespace)
+        }
+        return try module.value(method: String(method), args: args)
     }
 }

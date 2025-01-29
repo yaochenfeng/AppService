@@ -1,14 +1,14 @@
 import Foundation
 
 public struct LogService: ServiceKey {
-    
+    public static var name: String = "app.log"
     let name: String
     
     public init(_ name: String) {
         self.name = name
     }
     
-    static let logger = LogService("AppService")
+    static let logger = LogService("AppService").app
     public enum Level: String, Codable, CaseIterable, CustomStringConvertible {
         public var description: String {
             return rawValue
@@ -24,7 +24,7 @@ public struct LogService: ServiceKey {
 
 
 public extension Service where Base == LogService {
-    static func debug(
+    func debug(
             _ message: @autoclosure () -> String,
             file: String = #fileID,
             function: String = #function,
@@ -32,7 +32,7 @@ public extension Service where Base == LogService {
         ) {
             self.log(level: .debug, message: message(), file: file, function: function, line: line)
         }
-    static func info(
+    func info(
             _ message: @autoclosure () -> String,
             file: String = #fileID,
             function: String = #function,
@@ -41,13 +41,17 @@ public extension Service where Base == LogService {
             self.log(level: .info, message: message(), file: file, function: function, line: line)
         }
     
-    static func log(
+    func log(
             level: LogService.Level,
             message: String,
             file: String = #fileID,
             function: String = #function,
             line: UInt = #line
         ) {
-            debugPrint(level, message,function,line)
+            do {
+                try self.callAsFunction(method: "log", args: base.name, level, message, file, function, line)
+            } catch {
+                debugPrint(level, message,function,line)
+            }
         }
 }

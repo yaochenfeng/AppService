@@ -20,6 +20,10 @@ public protocol ServiceModule {
     var name: String { get }
     var stage: ServiceModuleStage { get }
     func bootstrap(_ context: ApplicationContext) async
+    
+    /// 模型动态调用方法， 根据name
+    @discardableResult
+    func callAsFunction(method: String, args: Any...) throws -> Any
 }
 
 public extension ServiceModule {
@@ -27,6 +31,10 @@ public extension ServiceModule {
         return String(describing: Self.self)
     }
     var stage: ServiceModuleStage { .window }
+    
+    func callAsFunction(method: String, args: Any...) throws -> Any {
+        throw ServiceError.unimplemented()
+    }
 }
 
 public extension ApplicationContext {
@@ -55,28 +63,28 @@ public extension ApplicationContext {
         
         guard !isTasking else { return }
         guard !modules.isEmpty else {
-            LogService.app.debug("finish all \(targetStage)")
+            LogService.logger.debug("finish all \(targetStage)")
             return
         }
         isTasking = true
         let groupTasks = Dictionary(grouping: modules, by: {$0.stage})
         
         for(stage, tasks) in groupTasks {
-            LogService.app.debug("start \(stage)")
+            LogService.logger.debug("start \(stage)")
             Task {
                 await withTaskGroup(of: Void.self, body: { group in
                     for task in tasks {
                         group.addTask {
                             
-                            LogService.app.debug("start task \(task.name)")
+                            LogService.logger.debug("start task \(task.name)")
                             await task.value.bootstrap(self)
                             task.isBooted = true
-                            LogService.app.debug("finish task \(task.name)")
+                            LogService.logger.debug("finish task \(task.name)")
                         }
                     }
                 })
                 
-                LogService.app.debug("finish \(stage)")
+                LogService.logger.debug("finish \(stage)")
                 isTasking = false
                 if stage <= targetStage {
                     bootstrap(targetStage)
