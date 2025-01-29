@@ -5,11 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "AppService",
+//    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     platforms: [
-        .iOS(.v14),
-        .macOS(.v11),
-        .tvOS(.v14),
-        .watchOS(.v7)
+        .iOS(.v13),
+        .macOS(.v10_15),
+        .macCatalyst(.v13),
+        .tvOS(.v13),
+        .watchOS(.v6)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
