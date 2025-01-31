@@ -5,16 +5,16 @@ public final class ServiceStore<State: ServiceState>: ObservableObject {
     @Published
     public private(set) var state: State
     private var reducers: [Reducer] = []
-    init(_ state: State, reducers: [Reducer] = []) {
+    public init(_ state: State, reducers: [Reducer] = []) {
         self.state = state
         self.reducers = reducers
     }
     
     
     
-    struct Reducer {
+    public struct Reducer {
         var reduce: (State, State.Action) -> State
-        init(_ handler: @escaping (State, State.Action) -> State) {
+        public init(_ handler: @escaping (State, State.Action) -> State) {
             self.reduce = handler
         }
 
