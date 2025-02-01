@@ -14,7 +14,7 @@ public struct Service<Base> {
     }
 }
 
-public protocol ServiceState: Equatable {
+public protocol ServiceState {
     typealias Reducer = (_ state: Self, _ action: Action) -> Self
     associatedtype Action
 }

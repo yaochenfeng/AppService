@@ -2,8 +2,7 @@
 public class ApplicationContext {
     public static var shared = ApplicationContext()
     public init() {
-        store = ServiceStore(.init(), reducers: [])
-        store.add { state, action in
+        store = ServiceStore(State(), reducer: { state, action in
             switch action {
             case .load(let newState):
                 return newState
@@ -16,7 +15,7 @@ public class ApplicationContext {
                 newState.storage[key] = nil
                 return newState
             }
-        }
+        })
     }
     
     var serviceModules: [AnyServiceModule] = []
@@ -34,7 +33,7 @@ extension ApplicationContext: ObservableObject {}
 
 
 public extension ApplicationContext {
-    struct State: ServiceState {
+    struct State: ServiceState, Equatable {
         public static func == (lhs: ApplicationContext.State, rhs: ApplicationContext.State) -> Bool {
             return lhs.storage.elementsEqual(rhs.storage) { lhs, rhs in
                 return lhs.key == rhs.key && equals(lhs.value, rhs.value)

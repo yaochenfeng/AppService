@@ -6,30 +6,10 @@
 //
 
 import SwiftUI
+#if canImport(WebKit)
 import WebKit
 
 class HybridWeb: WKWebView {
     
 }
-
-struct AppWebView: View {
-    let webView = HybridWeb(frame: .zero, configuration: Self.config).app
-        .chain { web in
-        
-    }
-    var body: some View {
-        webView.onAppear {
-            webView.base.load(URLRequest(url: URL(string: "https://m.baidu.com")!))
-        }
-    }
-    
-    static let config = WKWebViewConfiguration().app.then { base in
-        base
-    }
-}
-
-struct AppWebView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppWebView()
-    }
-}
+#endif

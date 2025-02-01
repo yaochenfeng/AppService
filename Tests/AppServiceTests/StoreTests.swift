@@ -9,7 +9,7 @@ import XCTest
 import Combine
 @testable import AppService
 
-struct TestState: ServiceState {
+struct TestState: ServiceState, Equatable {
     
     var isLogin: Bool
     var isAgreePravicy: Bool
@@ -31,7 +31,7 @@ final class StoreTests: XCTestCase {
     @MainActor
     override func setUp() {
         super.setUp()
-        store.add { state, action in
+        store.setReducer { state, action in
             switch action {
                 
             case .load(let newState):
