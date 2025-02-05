@@ -11,9 +11,9 @@ struct MainScene: Scene {
             store.state.mainView
         }
     }
-    init(store: ServiceStore<ApplicationContext.State>) {
-        self.store = store
-        EntryApp.context.bootstrap(.window)
+    init(context: ApplicationContext = .shared) {
+        self.store = context.store
+        context.bootstrap(.window)
     }
 }
 

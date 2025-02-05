@@ -1,6 +1,6 @@
 import Foundation
 import SwiftUI
-
+import AppService
 #if canImport(UIKit)
 import UIKit
 @available(iOS, deprecated: 14.0, message: "")
@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = UIHostingController(rootView: EntryApp.context.store.state.mainView)
+        let vc = UIHostingController(rootView: ApplicationContext.shared.store.state.mainView)
         window.rootViewController = UINavigationController(rootViewController: vc)
         window.makeKeyAndVisible()
         self.window = window
@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 struct WindowView: View {
-    @ObservedObject var store = EntryApp.context.store
+    @ObservedObject var store = ApplicationContext.shared.store
     var body: some View {
         store.state.mainView
     }
