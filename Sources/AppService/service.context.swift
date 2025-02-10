@@ -1,22 +1,7 @@
 
 public class ApplicationContext {
     public static var shared = ApplicationContext()
-    public init() {
-//        store = ServiceStore(State(), reducer: { state, action in
-//            switch action {
-//            case .load(let newState):
-//                return newState
-//            case .set(key: let key, value: let value):
-//                var newState = state
-//                newState.storage[key] = value
-//                return state.setValue(value, key: key)
-//            case .delete(key: let key):
-//                var newState = state
-//                newState.storage[key] = nil
-//                return newState
-//            }
-//        })
-    }
+    public init() {}
     
     var serviceModules: [AnyServiceModule] = []
     var targetStage: ServiceModuleStage = .application
@@ -44,6 +29,7 @@ public extension ApplicationContext {
     func contains(_ key: String) -> Bool {
         return storage.keys.contains(key)
     }
+   
     
     @discardableResult
     func callAsFunction(namespace: String, method: String, arg: Any) throws -> Any {

@@ -84,4 +84,9 @@ public extension ApplicationContext {
         setValue(value, key: "appStore")
         return value
     }
+    
+    @MainActor
+        func dispatch(_ action: State.Action, forceUpdate: Bool = false) {
+            store.dispatch(action)
+        }
 }

@@ -15,34 +15,28 @@ public extension View {
         return Service(self)
     }
 }
-//
-//#if canImport(UIKit)
-//import UIKit
-//
-//extension Service: View where Base: UIView {
-//}
-//
-//extension Service: UIViewRepresentable where Base: UIView {
-//    public func makeUIView(context: Context) -> Base {
-//        return base
-//    }
-//
-//    public func updateUIView(_ uiView: Base, context: Context) {}
-//
-//    public typealias UIViewType = Base
-//}
-//#elseif canImport(AppKit)
-//import AppKit
-//
-//extension Service: NSViewRepresentable where Base: NSView {
-//    public func makeNSView(context: Context) -> Base {
-//        return base
-//    }
-//
-//    public func updateNSView(_ nsView: Base, context: Context) {}
-//
-//    public typealias NSViewType = Base
-//}
-//#endif
-//
-//
+#if canImport(AppKit)
+import AppKit
+public extension Service where Base: NSView {
+    func asView() -> some View {
+        PlatformView<Base>(base)
+    }
+}
+struct PlatformView<T: NSView>: NSViewRepresentable {
+    func makeNSView(context: Context) -> T {
+        return base
+    }
+    
+    func updateNSView(_ nsView: T, context: Context) {
+        
+    }
+    
+    typealias NSViewType = T
+    
+    
+    let base: T
+    init(_ base: T) {
+        self.base = base
+    }
+}
+#endif
