@@ -3,6 +3,7 @@ import AppService
 
 @main
 struct Entry {
+    @MainActor
     static func main() {
         let context = ApplicationContext.shared
         if let mainBundle = Bundle.main.app.bundleName,

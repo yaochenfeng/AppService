@@ -23,7 +23,7 @@ public protocol ServiceModule {
     
     /// 模型动态调用方法， 根据name
     @discardableResult
-    func callAsFunction(method: String, args: Any...) throws -> Any
+    func callAsFunction(method: String, arg: Any) throws -> Any
 }
 
 public extension ServiceModule {
@@ -32,7 +32,7 @@ public extension ServiceModule {
     }
     var stage: ServiceModuleStage { .window }
     
-    func callAsFunction(method: String, args: Any...) throws -> Any {
+    func callAsFunction(method: String, arg: Any) throws -> Any {
         throw ServiceError.unimplemented()
     }
 }

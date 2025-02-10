@@ -20,6 +20,15 @@ public struct LogService: ServiceKey {
             case warn
             case error
         }
+    
+    public struct Argument {
+        public let name: String
+        public let level: Level
+        public let message: String
+        public let file: String
+        public let function: String
+        public let line: UInt
+    }
 }
 
 
@@ -49,7 +58,8 @@ public extension Service where Base == LogService {
             line: UInt = #line
         ) {
             do {
-                try self.callAsFunction(method: "log", args: base.name, level, message, file, function, line)
+                let argument = LogService.Argument(name: base.name, level: level, message: message, file: file, function: function, line: line)
+                try self.callAsFunction(method: "log", arg: argument)
             } catch {
                 debugPrint(level, message,function,line)
             }
