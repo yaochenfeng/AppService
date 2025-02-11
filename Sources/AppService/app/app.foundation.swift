@@ -31,9 +31,9 @@ public extension Service where Base == Bundle {
     static var bundleVersion: String {
         return Bundle.main.app.bundleVersion ?? "unkown"
     }
-    
+    /// 小写bundleid
     static var bundleIdentifier: String {
-        return Bundle.main.app.bundleIdentifier ?? "unkown"
+        return (Bundle.main.app.bundleIdentifier ?? "unkown").lowercased()
     }
 }
 
