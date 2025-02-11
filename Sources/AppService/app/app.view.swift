@@ -1,36 +1,64 @@
 import Foundation
 import SwiftUI
 
-#if canImport(UIKit)
-import UIKit
-
-extension Service: View where Base: UIView {
-    
-}
-
-extension Service: UIViewRepresentable where Base: UIView {
-    public func makeUIView(context: Context) -> Base {
+extension Service: View where Base: View {
+    public var body: Base {
         return base
     }
-    
-    public func updateUIView(_ uiView: Base, context: Context) {}
-    
-    public typealias UIViewType = Base
+    public func asAnyView() -> AnyView {
+        return AnyView(base)
+    }
 }
-#elseif canImport(AppKit)
+
+public extension View {
+    var app: Service<Self> {
+        return Service(self)
+    }
+}
+#if canImport(AppKit)
 import AppKit
-
-extension Service: View where Base: NSView {}
-
-extension Service: NSViewRepresentable where Base: NSView {
-    public func makeNSView(context: Context) -> Base {
+public extension Service where Base: NSView {
+    func asView() -> some View {
+        PlatformView<Base>(base)
+    }
+}
+struct PlatformView<T: NSView>: NSViewRepresentable {
+    func makeNSView(context: Context) -> T {
         return base
     }
     
-    public func updateNSView(_ nsView: Base, context: Context) {}
+    func updateNSView(_ nsView: T, context: Context) {}
     
-    public typealias NSViewType = Base
+    typealias NSViewType = T
+    
+    
+    let base: T
+    init(_ base: T) {
+        self.base = base
+    }
 }
 #endif
 
-
+#if canImport(UIKit)
+import UIKit
+public extension Service where Base: UIView {
+    func asView() -> some View {
+        PlatformView<Base>(base)
+    }
+}
+struct PlatformView<T: UIView>: UIViewRepresentable {
+    func makeUIView(context: Context) -> T {
+        return base
+    }
+    
+    func updateUIView(_ uiView: T, context: Context) {}
+    
+    typealias UIViewType = T
+    
+    
+    let base: T
+    init(_ base: T) {
+        self.base = base
+    }
+}
+#endif
