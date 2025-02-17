@@ -73,7 +73,7 @@ public struct NavigationPage<Content: View>: View {
         } else {
             NavigationView {
                 content
-                    .availableBackground {
+                    .appBackground {
                         NavigationLink(destination: destinationView(), isActive: .init(get: {
                             !navigator.paths.isEmpty
                         }, set: { value in

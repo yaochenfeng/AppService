@@ -52,7 +52,7 @@ public extension ApplicationContext {
     }
     
     @MainActor
-        func dispatch(_ action: State.Action, forceUpdate: Bool = false) {
+        func dispatch(_ action: State.Action) {
             store.dispatch(action)
         }
 }

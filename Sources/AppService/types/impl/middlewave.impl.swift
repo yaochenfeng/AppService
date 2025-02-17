@@ -6,9 +6,9 @@ public struct LoggingMiddleware<State: ServiceStateType>: ServiceMiddlewareType 
         context: MiddlewareContext<State>,
         next: @escaping (State.Action) async -> Void
     ) async {
-        print("[Middleware] Before Action: \(action), State: \(context.state)")
+        print("[Logging] Before Action: \(action), State: \(context.state)")
         await next(action) // 继续下一个 Middleware
-        print("[Middleware] After Action: \(action), State: \(context.state)")
+        print("[Logging] After Action: \(action), State: \(context.state)")
     }
 }
 
