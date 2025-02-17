@@ -1,11 +1,11 @@
 import Foundation
 
 public protocol ServiceKey {
-    static var name: String { get }
+    static var namespace: String { get }
 }
 
 public extension ServiceKey {
-    static var name: String {
+    static var namespace: String {
         return String(describing: Self.self)
     }
     
@@ -23,7 +23,7 @@ extension NSObject: ServiceKey {}
 public extension Service where Base: ServiceKey {
     @discardableResult
     func callAsFunction(method: String, arg: Any) throws -> Any {
-        let namespace = Base.name
+        let namespace = Base.namespace
         return try getContext.callAsFunction(namespace: namespace, method: method, arg: arg)
     }
 }

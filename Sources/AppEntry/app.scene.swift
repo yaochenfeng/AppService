@@ -18,7 +18,18 @@ struct MainScene: Scene {
 }
 
 public extension ApplicationContext {
-    struct State: ServiceState {
+    struct State: ServiceStateType {
+        public static func reducer(state: State, action: Action) -> State {
+            var newValue = state
+            switch action {
+                
+            case .setMain(let builder):
+                newValue.mainView = builder()
+            }
+            return newValue;
+        }
+        
+        
         public enum Action {
             case setMain(_ builder: () -> AnyView)
         }
@@ -34,15 +45,8 @@ public extension ApplicationContext {
         if let value: ServiceStore<State> = getValue("appStore") {
             return value
         }
-        let value = ServiceStore<State>.init(State()) { state, action in
-            var newValue = state
-            switch action {
-                
-            case .setMain(let builder):
-                newValue.mainView = builder()
-            }
-            return newValue;
-        }
+        
+        let value = ServiceStore<State>.init(State())
         setValue(value, key: "appStore")
         return value
     }

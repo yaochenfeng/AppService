@@ -1,11 +1,12 @@
 import Foundation
 
 public struct LogService: ServiceKey {
-    public static var name: String = "app.log"
-    let name: String
+    public static let main = LogService("main").app
+    public static let name: String = "app.log"
+    let category: String
     
-    public init(_ name: String) {
-        self.name = name
+    public init(_ category: String) {
+        self.category = category
     }
     
     static let logger = LogService("AppService").app
@@ -58,7 +59,7 @@ public extension Service where Base == LogService {
             line: UInt = #line
         ) {
             do {
-                let argument = LogService.Argument(name: base.name, level: level, message: message, file: file, function: function, line: line)
+                let argument = LogService.Argument(name: base.category, level: level, message: message, file: file, function: function, line: line)
                 try self.callAsFunction(method: "log", arg: argument)
             } catch {
                 debugPrint(level, message,function,line)

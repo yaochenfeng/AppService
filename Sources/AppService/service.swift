@@ -14,10 +14,10 @@ public struct Service<Base> {
     }
 }
 
-public protocol ServiceState {
-    typealias Reducer = (_ state: Self, _ action: Action) -> Self
-    associatedtype Action
-}
+//public protocol ServiceState {
+//    typealias Reducer = (_ state: Self, _ action: Action) -> Self
+//    associatedtype Action
+//}
 
 public protocol ServiceDecode {
     init(_ context: ApplicationContext)
