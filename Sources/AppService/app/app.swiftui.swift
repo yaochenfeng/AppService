@@ -14,4 +14,24 @@ public extension View {
             }
         }
     }
+    func appOverlay<T: View>(alignment: Alignment = .center, builder: () -> T) -> some View {
+        if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+            return self.overlay(alignment: alignment) {
+                builder()
+            }
+        } else {
+            return ZStack {
+                self
+                ZStack(alignment: alignment){
+                    builder()
+                }
+            }
+        }
+    }
+    func appAny() -> AnyView {
+        if let newValue = self as? AnyView {
+            return newValue
+        }
+        return AnyView(self)
+    }
 }
