@@ -11,9 +11,10 @@ class EntryModule: NSObject, ServiceDecode {
         super.init()
         context.add(LoggerModule())
         context.add(PrivacyModule())
-        context.store.dispatch(.set(key: "isLogin", value: true))
-        context.store.dispatch(.setMainView(builder: {
+        context.setValue(true, key: "isLogin")
+        context.dispatch(.setMain({
             ContentView()
+                .appAny()
         }))
     }
     

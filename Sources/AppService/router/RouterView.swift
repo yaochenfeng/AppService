@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by yaochenfeng on 2025/2/19.
-//
-
 import SwiftUI
 
 public struct RouterView {
@@ -52,7 +45,6 @@ extension RouterView: View {
                         getRoot()
                     }
                 }
-                .navigationBarHidden(true)
             }.environment(\.router, self.router)
         }
     }

@@ -1,6 +1,9 @@
 import Foundation
 
 public extension Service where Base == Bundle {
+    var displayName: String? {
+        return value("CFBundleDisplayName")
+    }
     var bundleName: String? {
         return value("CFBundleName")
     }
@@ -34,6 +37,13 @@ public extension Service where Base == Bundle {
     /// 小写bundleid
     static var bundleIdentifier: String {
         return (Bundle.main.app.bundleIdentifier ?? "unkown").lowercased()
+    }
+    
+    static var displayName: String {
+        if let value = Bundle.main.app.displayName {
+            return value
+        }
+        return Bundle.main.app.bundleName ?? ""
     }
 }
 

@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by yaochenfeng on 2025/2/18.
-//
-
 import SwiftUI
 
 public struct RoutePage<Content:View> {

@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 public final class Router: ObservableObject {
     public static var shared = Router()
     public init() {}
@@ -12,25 +11,17 @@ public final class Router: ObservableObject {
     public var notFound: RoutePage<AnyView> = RoutePage<AnyView>(path: .page404) { arg in
         Text("404")
     }
-    
-    func getPage(path: RoutePath, param: RouteParam) -> RoutePage<AnyView> {
-        if let factory = routeMap[path] {
-            return factory(param)
-        } else if let factory = onGenerateRoute {
-            return factory(param)
-        }
-        return notFound
-    }
 }
 
 public extension Router {
     // MARK: - 注册路由
-    func register<Content: View>(path: RoutePath, builder: @escaping (RouteParam) -> Content) {
+    @discardableResult
+    func register<Content: View>(path: RoutePath, builder: @escaping (RouteParam) -> Content) -> Self {
         routeMap[path] = { arg in
             RoutePage<AnyView>(path: path, param: arg, builder: builder)
         }
+        return self
     }
-    
     
     
     func push(_ path: RoutePath, params: RouteParam = [:]) {
@@ -41,6 +32,15 @@ public extension Router {
         if !pageStack.isEmpty {
             pageStack.removeLast()
         }
+    }
+    
+    func getPage(path: RoutePath, param: RouteParam) -> RoutePage<AnyView> {
+        if let factory = routeMap[path] {
+            return factory(param)
+        } else if let factory = onGenerateRoute {
+            return factory(param)
+        }
+        return notFound
     }
 }
 
