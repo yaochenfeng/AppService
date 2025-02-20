@@ -12,10 +12,11 @@ class EntryModule: NSObject, ServiceDecode {
         context.add(LoggerModule())
         context.add(PrivacyModule())
         context.setValue(true, key: "isLogin")
-        context.dispatch(.setMain({
-            ContentView()
-                .appAny()
-        }))
+        context.dispatch(.setMain(routerView))
+    }
+    
+    var routerView: RouterView = RouterView { param in
+        ContentView()
     }
     
 //    @MainActor
@@ -34,4 +35,9 @@ extension EntryModule: ServiceModule {
     }
     
     
+}
+
+
+extension Router.RoutePath {
+    static let webPage: Router.RoutePath  = "webpage"
 }

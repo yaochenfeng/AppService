@@ -18,8 +18,10 @@ struct PrivacyModule: ServiceModule {
     var stage: ServiceModuleStage = .privacy
     @MainActor
     func bootstrap(_ context: AppService.ApplicationContext) {
-        context.dispatch(.setMain({
-            PrivacyView().appAny()
-        }))
+        context.dispatch(.setMain(routerView))
+    }
+    
+    var routerView: RouterView = RouterView { param in
+        PrivacyView()
     }
 }

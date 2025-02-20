@@ -24,17 +24,16 @@ public extension ApplicationContext {
             switch action {
                 
             case .setMain(let builder):
-                newValue.mainView = builder()
+                newValue.mainView = builder
             }
             return newValue;
         }
         
         
         public enum Action {
-            case setMain(_ builder: () -> AnyView)
+            case setMain(RouterView)
         }
-        var mainView: AnyView = Text("import AppEntry dispatch setMainView")
-            .app.asAnyView()
+        var mainView: RouterView = RouterView(router: .shared, root: .index)
             
         init() {
             
