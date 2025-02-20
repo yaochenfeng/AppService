@@ -8,6 +8,9 @@ public final class Router: ObservableObject {
     var pageStack: [RoutePage<AnyView>] = []
     var routeMap: [RoutePath: RouteFactory] = [:]
     var onGenerateRoute: RouteFactory?
+    public var parseRoute: (String) -> (RoutePath, RouteParam)? = { str in
+        return nil
+    }
     public var notFound: RoutePage<AnyView> = RoutePage<AnyView>(path: .page404) { arg in
         Text("404")
     }
@@ -21,6 +24,13 @@ public extension Router {
             RoutePage<AnyView>(path: path, param: arg, builder: builder)
         }
         return self
+    }
+    
+    func handleLink(_ string: String) {
+        guard let item = self.parseRoute(string) else {
+            return
+        }
+        push(item.0, params: item.1)
     }
     
     
