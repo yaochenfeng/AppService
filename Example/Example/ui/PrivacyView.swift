@@ -22,7 +22,7 @@ struct PrivacyView: View {
             }
             
             Button("点击网页") {
-                router.push(.webPage)
+                router.navigate(.webPage)
             }
         }.padding()
     }

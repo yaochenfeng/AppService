@@ -6,6 +6,8 @@ public final class Router: ObservableObject {
     typealias RouteFactory = (RouteParam) -> RoutePage<AnyView>
     @Published
     var pageStack: [RoutePage<AnyView>] = []
+    @Published
+    public var rootPath: RoutePath = .index
     var routeMap: [RoutePath: RouteFactory] = [:]
     var onGenerateRoute: RouteFactory?
     public var parseRoute: (String) -> (RoutePath, RouteParam)? = { str in
@@ -19,7 +21,8 @@ public final class Router: ObservableObject {
 public extension Router {
     // MARK: - 注册路由
     @discardableResult
-    func register<Content: View>(path: RoutePath, builder: @escaping (RouteParam) -> Content) -> Self {
+    func register<Content: View>(path: RoutePath,
+                                 @ViewBuilder builder: @escaping (RouteParam) -> Content) -> Self {
         routeMap[path] = { arg in
             RoutePage<AnyView>(path: path, param: arg, builder: builder)
         }
@@ -30,11 +33,13 @@ public extension Router {
         guard let item = self.parseRoute(string) else {
             return
         }
-        push(item.0, params: item.1)
+        navigate(item.0, params: item.1)
     }
     
-    
-    func push(_ path: RoutePath, params: RouteParam = [:]) {
+    func navigate(_ path: RoutePath, params: RouteParam = [:]) {
+        if path == rootPath {
+            return popRoot()
+        }
         let page = getPage(path: path, param: params)
         pageStack.append(page)
     }
@@ -42,6 +47,10 @@ public extension Router {
         if !pageStack.isEmpty {
             pageStack.removeLast()
         }
+    }
+    
+    func popRoot() {
+        pageStack.removeAll()
     }
     
     func getPage(path: RoutePath, param: RouteParam) -> RoutePage<AnyView> {
@@ -101,6 +110,18 @@ extension Router.RouteParam {
     }
 }
 
+extension Router.RouteStyle {
+    var transition: AnyTransition {
+        switch self {
+        case .push:
+            return .asymmetric(insertion: .move(edge: .trailing), removal: .opacity)
+        case .modal:
+            return .move(edge: .bottom)
+        case .fullScreen:
+            return .scale(scale: 0.8).combined(with: .opacity)
+        }
+    }
+}
 extension Router.RouteParam: ExpressibleByDictionaryLiteral {
     public init(dictionaryLiteral elements: (String, Any)...) {
         self.values = Dictionary(uniqueKeysWithValues: elements)
@@ -113,12 +134,14 @@ extension Router.RouteParam: Equatable {
     }
 }
 
-
-struct RouterKey: EnvironmentKey {
-    static var defaultValue = Router.shared
-}
-
 extension EnvironmentValues {
+    struct RouterKey: EnvironmentKey {
+        static var defaultValue = Router.shared
+    }
+    struct RouteParamKey: EnvironmentKey {
+        static var defaultValue = Router.RouteParam()
+    }
+    
     public var router: Router {
         get {
             return self[RouterKey.self]
@@ -126,5 +149,24 @@ extension EnvironmentValues {
         set {
             self[RouterKey.self] = newValue
         }
+    }
+    
+    public var routeParam: Router.RouteParam {
+        get {
+            return self[RouteParamKey.self]
+        }
+        set {
+            self[RouteParamKey.self] = newValue
+        }
+    }
+}
+
+
+extension Router {
+    /// 路由动画
+    enum RouteStyle: String, CaseIterable {
+        case push         // 默认 push 方式
+        case modal        // 模态弹出（带底部滑入动画）
+        case fullScreen   // 全屏覆盖（带缩放效果）
     }
 }

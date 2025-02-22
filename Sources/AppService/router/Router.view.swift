@@ -26,7 +26,8 @@ extension RoutePage where Content == AnyView {
         self.path = path
              self.param = param
         self.builder =  { arg in
-            content(arg).appAny()
+            content(arg)
+                .appAny()
         }
     }
 }
@@ -47,14 +48,41 @@ extension RoutePage: Hashable where Content == AnyView {
 extension RoutePage: View {
     public var body: some View {
         builder(param)
+            .environment(\.routeParam, param)
+    }
+}
+
+public struct RouterLink<Label> where Label: View {
+    @Environment(\.router) var router
+    let path: Router.RoutePath
+    let param: Router.RouteParam
+    let builder: () -> Label
+    
+    public init(path: Router.RoutePath,
+         param: Router.RouteParam = [:],
+                @ViewBuilder label builder: @escaping () -> Label) {
+        self.path = path
+        self.param = param
+        self.builder = builder
+    }
+}
+
+extension RouterLink: View {
+    public var body: some View {
+        Button(action: {
+            router.navigate(path,params: param )
+        }, label: builder)
     }
 }
 
 struct RoutePage_Previews: PreviewProvider {
     static var previews: some View {
-//        SwiftUIView()
-        RoutePage.init(path: .index) { param in
-            Text("hello")
+        RouterView {_ in
+            RoutePage.init(path: .index) { param in
+                RouterLink(path: .index) {
+                    Text("index")
+                }
+            }
         }
         
     }
